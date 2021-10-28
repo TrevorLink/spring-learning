@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--通过参数列表的下标对带参构造器赋值-->
+    <!--    <bean id="user" class="com.niao.pojo.User">-->
+    <!--        <constructor-arg index="0" value="NiaoIndex"/>-->
+    <!--    </bean>-->
+    <!--通过参数列表的类型进行赋值-->
+<!--    <bean id="user" class="com.niao.pojo.User">-->
+<!--        <constructor-arg type="java.lang.String" value="NiaoType"/>-->
+<!--    </bean>-->
+    <!--通过参数列表的参数名进行赋值-->
+    <bean id="user" class="com.niao.pojo.User">
+        <constructor-arg name="name" value="NiaoName"/>
+    </bean>
+    <bean id="userPro" class="com.niao.pojo.UserPro">
+    </bean>
+    <!--有了别名之后，我们真名别名都可以使用，来指定这个对象（废话）-->
+    <alias name="user" alias="userPlus"/>
+</beans>

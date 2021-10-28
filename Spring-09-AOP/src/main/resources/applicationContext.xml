@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--注册bean-->
+    <bean id="userService" class="com.niao.service.UserServiceImpl"/>
+    <bean id="beforeLog" class="com.niao.log.BeforeLog"/>
+    <bean id="afterLog" class="com.niao.log.AfterLog"/>
+    <!--方式一：使用原生API-->
+    <!--配置aop信息，在此之前注意导入命名空间和头文件约束！！！-->
+    <!--    <aop:config>-->
+    <!--        &lt;!&ndash;execution(权限修饰符 返回值类型 包名.类名/接口名.方法名(参数列表))，这个表达式可以定位要切入的切入点在哪里&ndash;&gt;-->
+    <!--        &lt;!&ndash;其中我们这里写的其实就是UserServiceImpl下的包含所有参数列表的所有方法，全部都切入进去&ndash;&gt;-->
+    <!--        <aop:pointcut id="pointcut" expression="execution(* com.niao.service.UserServiceImpl.*(..))"/>-->
+    <!--        &lt;!&ndash;执行环绕增强&ndash;&gt;-->
+    <!--        &lt;!&ndash;这句话的意思就是我们把beforeLog这个bean(里的方法)，切入到名字叫做pointcut的切入点里面去&ndash;&gt;-->
+    <!--        <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>-->
+    <!--        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>-->
+    <!--    </aop:config>-->
+
+    <!--方式二：使用自定义类-->
+    <!--首先万事万物就上来丢进IOC注册托管-->
+<!--    <bean id="myEnhanceAspect" class="com.niao.diy.MyEnhanceAspect"/>-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pointcutPro" expression="execution(* com.niao.service.UserServiceImpl.*(..))"/>-->
+<!--        &lt;!&ndash;把要增强的内容封装成为一个单独的类，这就是官网提到的切面&ndash;&gt;-->
+<!--        <aop:aspect ref="myEnhanceAspect">-->
+<!--            &lt;!&ndash;类中定义的方法 &ndash;&gt;-->
+<!--            <aop:before method="before" pointcut-ref="pointcutPro"/>-->
+<!--            <aop:after method="after" pointcut-ref="pointcutPro"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <!--方式三：使用注解-->
+<bean id="annotationEnhanced" class="com.niao.diy.AnnotationEnhanced"/>
+    <!--开启注解动态代理支持-->
+    <aop:aspectj-autoproxy/>
+</beans>

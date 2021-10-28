@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="MysqlImpl" class="com.niao.dao.UserDaoMysqlImpl"/>
+    <bean id="BaseImpl" class="com.niao.dao.UserDaoImpl"/>
+    <bean id="com.niao.service.UserServiceImpl" class="com.niao.service.com.niao.service.UserServiceImpl">
+        <!--value表示基本类型的具体的值-->
+        <!--ref表示引用Spring容器中已经创建（托管）好的对象-->
+        <property name="userDao" ref="BaseImpl"/>
+    </bean>
+</beans>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean name="address" class="com.niao.pojo.Address">
+        <property name="address" value="1#601"/>
+    </bean>
+    <bean name="student" class="com.niao.pojo.Student">
+        <!--普通值注入-->
+        <property name="name" value="小闸总"/>
+        <!--bean注入-->
+        <property name="address" ref="address"/>
+        <!--数组注入-->
+        <property name="books">
+            <array>
+                <value>《JAVA从入门到入土》</value>
+                <value>《Spring从实战到放弃》</value>
+                <value>《Mysql从删库到跑路》</value>
+            </array>
+        </property>
+        <!--List注入-->
+        <property name="hobbies">
+            <list>
+                <value>打电动</value>
+                <value>敲代码</value>
+                <value>学穿搭</value>
+            </list>
+        </property>
+        <!--Map注入-->
+        <property name="card">
+            <map>
+                <entry key="身份证" value="213293712144172"/>
+                <entry key="学生证" value="456293731314172"/>
+            </map>
+        </property>
+        <!--Set注入-->
+        <property name="games">
+            <set>
+                <value>FinalFantasyXV</value>
+                <value>TheLegendOfZelda</value>
+            </set>
+        </property>
+        <!--Null注入-->
+        <property name="wife">
+            <null/>
+        </property>
+        <!--Properties配置文件注入-->
+        <property name="info">
+            <props>
+                <prop key="id">20122659</prop>
+                <prop key="class">CSSE</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

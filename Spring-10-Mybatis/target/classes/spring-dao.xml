@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--本配置文件主要注册整合Mybatis的配置信息-->
+
+    <!--首先我们需要有一个数据源替换Mybatis的配置，我们这里使用Spring提供的JDBC-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!--为数据源注入配置信息-->
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatis?userSSL=true&amp;
+                userUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    </bean>
+    <!--有了数据源我们就可以创建SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--在这里我们还可以绑定原先mybatis-config配置文件的内容-->
+        <!--毕竟SqlSessionFactory就是读取配置文件然后Build出来的嘛-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--还可以绑定Mapper，代替原来配置文件中的Mapper注册标签，所以这里写了之后原来的mybatis-config就不用写了-->
+        <property name="mapperLocations" value="classpath:com/niao/mapper/*.xml"/>
+    </bean>
+    <!--有了SqlSessionFactory之后，我们就可以创建SqlSession了，在Spring整合Mybatis的时候，SqlSession被强化成了SqlSessionTemplate-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <!--点进源码可知SqlSessionTemplate并没有Set方法注入值，只有构造器，所以使用构造器注入-->
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+</beans>

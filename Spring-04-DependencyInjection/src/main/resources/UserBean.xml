@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--根据p命名空间实现值的注入-->
+    <!--以前的做法-->
+<!--    <bean id="userTestPTradition" class="com.niao.pojo.User">-->
+<!--        <property name="age" value="19"/>-->
+<!--        <property name="name" value="小闸总"/>-->
+<!--    </bean>-->
+    <bean id="userTestP" class="com.niao.pojo.User" p:age="19" p:name="小闸总"/>
+    <!--根据c命名空间实现值的注入-->
+    <!--以前的做法-->
+   <!-- <bean id="userTestCTradition" class="com.niao.pojo.User">
+        <property name="age" value="20"/>
+        <property name="name" value="嬲嬲嬲"/>
+    </bean>-->
+    <bean id="userTestC" class="com.niao.pojo.User" c:age="20" c:name="嬲嬲嬲"/>
+    <bean id="user" class="com.niao.pojo.User" scope="prototype"/>
+</beans>

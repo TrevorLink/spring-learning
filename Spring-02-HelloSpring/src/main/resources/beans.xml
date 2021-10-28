@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--使用Spring创建bean对象，在Spring中这些都称为bean-->
+    <!--class属性指向一个实体类,即要new的对象-->
+    <!--id表示创建的对象的变量名-->
+    <!--所以下面这一行代码其实就是Hello hello = new Hello()-->
+    <bean id="hello" class="com.niao.pojo.Hello">
+        <!--property相当于为属性赋值-->
+        <property name="str" value="Spring"/>
+    </bean>
+</beans>
